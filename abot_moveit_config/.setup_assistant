@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: abot
+    relative_path: urdf/abot.urdf
+    xacro_args: "--inorder "
+  SRDF:
+    relative_path: config/abot.srdf
+  CONFIG:
+    author_name: TonyLin
+    author_email: tloinny@gmail.com
+    generated_timestamp: 1551603555
