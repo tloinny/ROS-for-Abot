@@ -6,11 +6,14 @@
 
 typedef actionlib::SimpleActionServer<control_msgs::FollowJointTrajectoryAction> AbotServer;
 
+static uint8_t send_buf[14];
+static abot::Abot_control* Abot;
+
  /* AtionServer回调函数，在此接收MoveIt的goal，并且处理后发送给下位机 */
 void Send2Serial(const control_msgs::FollowJointTrajectoryGoalConstPtr& a_goal, AbotServer* as, abot::Abot_control* robot)
 {
     int numOfPoints = a_goal->trajectory.points.size(); /* get the number of points */
-    uint8_t send_buf[14];
+    //uint8_t send_buf[14];
     float lastDuration = 0.0;
         for (size_t i = 0; i < numOfPoints; i++)    /* 将goal做第一次处理，暂存到Js中 */
         {
@@ -27,25 +30,23 @@ void Send2Serial(const control_msgs::FollowJointTrajectoryGoalConstPtr& a_goal, 
                 send_buf[i] = robot->abotJointstate.Js[n]%254;
                 send_buf[i+1] = robot->abotJointstate.Js[n]/254;
                 send_buf[i+2] = 0;
-				ROS_INFO("| %d | %d | %d | num:%d |",n,send_buf[i],send_buf[i+1],send_buf[i+1]*254+send_buf[i]);
+                ROS_INFO("| %d | %d | %d | num:%d |",n,send_buf[i],send_buf[i+1],send_buf[i+1]*254+send_buf[i]);
             }
-            // if(robot->ros_serial.isOpen())
-            // {
-            //     robot->ros_serial.write(send_buf,14);  /* 用串口发送出去 */
-            //     ROS_INFO("%d",send_buf);
-            // }
+            if(i==numOfPoints-1)Abot->SerialSend(14);
         }
     as->setSucceeded(); /* 给client发送成功信号 */
 }
 
 int main(int argc, char *argv[])
 {
-	ros::init(argc, argv, "abot_control");
-    abot::Abot_control Abot(4);
-	ros::NodeHandle actionServer;   /* actionSever句柄 */
-    AbotServer abotServer(actionServer,"abot_controller/follow_joint_trajectory",boost::bind(&Send2Serial,_1,&abotServer,&Abot),false); /* 初始化AtionServer */
+    ros::init(argc, argv, "abot_control");
+    Abot = new abot::Abot_control(4);
+    Abot->setSendBuf(send_buf);
+    Abot->SerialSend(14);
+    ros::NodeHandle actionServer;   /* actionSever句柄 */
+    AbotServer abotServer(actionServer,"abot_controller/follow_joint_trajectory",boost::bind(&Send2Serial,_1,&abotServer,Abot),false); /* 初始化AtionServer */
     ROS_INFO("TrajectoryActionServer: Starting");
     abotServer.start();   /* 启动server */
-	ros::spin();    /* 启动ros线程 */
+    ros::spin();    /* 启动ros线程 */
     return 0;
 }

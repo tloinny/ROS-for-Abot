@@ -23,7 +23,11 @@ namespace abot
         ros::NodeHandle jointStatePublisher;    /* 关节状态发布者句柄 */
         AbotJointState abotJointstate;  /* 暂存关节状态 */
         serial::Serial ros_serial;  /* 跟下位机通讯的串口接口 */
+        void SerialSend(int len);
+        void setSendBuf(uint8_t* send_buf);
     private:
+        void SerialInit();
+        uint8_t* pSendBuf;
     };
 }
 

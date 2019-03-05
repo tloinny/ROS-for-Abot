@@ -3,10 +3,15 @@
 abot::Abot_control::Abot_control(int num)
 {
     numOfJoints = num;
+    SerialInit();
+}
+
+void abot::Abot_control::SerialInit()
+{
     try
     {
-    //设置串口属性，并打开串口
-        ros_serial.setPort("/dev/ttyUSB0");
+        //设置串口属性，并打开串口
+        ros_serial.setPort("/dev/mcu_uart");
         ros_serial.setBaudrate(115200);
         serial::Timeout to = serial::Timeout::simpleTimeout(1000);
         ros_serial.setTimeout(to);
@@ -22,6 +27,19 @@ abot::Abot_control::Abot_control(int num)
     }
     else
     {
-        ROS_INFO("Serial Port fails");
+        ROS_ERROR_STREAM("Serial Port fails");
+    }
+}
+
+void abot::Abot_control::setSendBuf(uint8_t* send_buf)
+{
+    pSendBuf = send_buf;
+}
+
+void abot::Abot_control::SerialSend(int len)
+{
+    if(ros_serial.isOpen())
+    {
+        ros_serial.write(pSendBuf,len);  /* 用串口发送出去 */
     }
 }
