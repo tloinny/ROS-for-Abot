@@ -8,7 +8,6 @@
 struct AbotJointState
 {
     int Js[4];
-    float duration;
 };
 
 typedef struct AbotJointState AbotJointState;
