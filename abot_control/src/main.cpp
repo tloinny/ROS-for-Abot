@@ -42,7 +42,7 @@ void Send2Serial(const control_msgs::FollowJointTrajectoryGoalConstPtr& a_goal, 
                 }
             }
             send_buf[0] = 255;
-            send_buf[1] = 255;  /* 设置首尾标志位 */
+            send_buf[13] = 255;  /* 设置首尾标志位 */
             int n = 0;
             for (size_t i = 1; i < 13; i+=3,++n)  /* 将经过第一次处理的goal进行第二次加工，生成下位机能够识别的格式，并使用串口发送给下位机 */
             {
