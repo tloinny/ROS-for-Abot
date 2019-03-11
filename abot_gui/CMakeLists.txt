@@ -1,13 +1,11 @@
 cmake_minimum_required(VERSION 2.8.3)
 add_definitions(-std=c++11)
-project(abot_control)
+project(abot_gui)
 
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
-
-#add_definitions(-DQT_NO_KEYWORDS)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -16,27 +14,25 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(Qt5Widgets)
-find_package(Qt5  REQUIRED COMPONENTS  Widgets)
+find_package(Qt5 REQUIRED COMPONENTS Widgets)
 find_package(catkin REQUIRED COMPONENTS
-  actionlib
   roscpp
-  serial
+  interactive_markers
+  moveit_core
+  moveit_ros_perception
+  moveit_ros_planning_interface
+  pluginlib
   std_msgs
-  control_msgs
-  actionlib_msgs
-  moveit_msgs
 )
 
 qt5_wrap_ui(ui_FILES ui/mainwindow.ui)
 
 qt5_wrap_cpp(MOC_FILES
-  include/abot_control/abot_gui.h
+  include/abot_gui/abot_gui.h
 )
 
 set(SOURCE_FILES
-    src/abot_control.cpp
     src/abot_gui.cpp
-    src/abot_node.cpp
     ${ui_FILES}
     ${MOC_FILES}
 )
@@ -142,9 +138,9 @@ target_link_libraries(${PROJECT_NAME}
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   INCLUDE_DIRS include
-  #LIBRARIES abot_control
-  #CATKIN_DEPENDS actionlib roscpp serial std_msgs
-  DEPENDS actionlib_msgs moveit_msgs
+#  LIBRARIES abot_gui
+#  CATKIN_DEPENDS roscpp
+#  DEPENDS system_lib
 )
 
 ###########
@@ -160,8 +156,8 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/abot_control.cpp
-# ) 
+#   src/${PROJECT_NAME}/abot_gui.cpp
+# )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -171,7 +167,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(abot_control_node src/main.cpp ${SOURCE_FILES})
+add_executable(${PROJECT_NAME}_node src/main.cpp ${SOURCE_FILES})
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -184,10 +180,11 @@ add_executable(abot_control_node src/main.cpp ${SOURCE_FILES})
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(abot_control_node
-    ${PROJECT_NAME}
-    Qt5::Widgets
-)
+ target_link_libraries(${PROJECT_NAME}_node
+   ${catkin_LIBRARIES}
+   ${PROJECT_NAME}
+   Qt5::Widgets
+ )
 
 #############
 ## Install ##
@@ -229,7 +226,7 @@ target_link_libraries(abot_control_node
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_abot_control.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_abot_gui.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
