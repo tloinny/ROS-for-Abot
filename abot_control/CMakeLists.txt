@@ -27,15 +27,8 @@ find_package(catkin REQUIRED COMPONENTS
   moveit_msgs
 )
 
-qt5_wrap_ui(ui_FILES ui/mainwindow.ui)
-
-qt5_wrap_cpp(MOC_FILES
-  include/abot_control/abot_gui.h
-)
-
 set(SOURCE_FILES
     src/abot_control.cpp
-    src/abot_gui.cpp
     src/abot_node.cpp
     ${ui_FILES}
     ${MOC_FILES}

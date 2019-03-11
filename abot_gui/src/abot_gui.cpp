@@ -27,17 +27,7 @@ void abot::abot_gui::on_pushButton_clicked()
 
 void abot::abot_gui::on_pushButton_1_clicked()
 {
-  X = ui->doubleSpinBox_1->text().toDouble();
-  Y = ui->doubleSpinBox_2->text().toDouble();
-  Z = ui->doubleSpinBox_3->text().toDouble();
-  ui->textBrowser->insertPlainText(QString::number(X,10,5)+","+QString::number(Y,10,5)+","+QString::number(Z,10,5));
-  if(showTimeStamp == 1)
-  {
-    QDateTime current_date_time = QDateTime::currentDateTime();
-    ui->textBrowser->insertPlainText(current_date_time.toString("yyyy.MM.dd hh:mm:ss.zzz")+"\n");
-  }else {
-    ui->textBrowser->insertPlainText("\n");
-  }
+  ui->textBrowser->setPlainText("");
 }
 
 void abot::abot_gui::on_checkBox_stateChanged(int state)

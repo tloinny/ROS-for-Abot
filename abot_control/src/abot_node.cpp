@@ -7,11 +7,6 @@ abot::abot_node::abot_node(int argc, char** argv):
   init_argv(argv),
   Abot_controller(new abot::Abot_control(4))
 {
-  /* init GUI */
-//  window.setWindowTitle("ABOT");
-//  gui = new abot_gui(&window);
-//  gui->show();
-
   /* init ros */
   ros::init(init_argc,init_argv,"abot");
   if(!ros::master::check())   /* check ros master */

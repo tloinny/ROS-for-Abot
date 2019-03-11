@@ -13,11 +13,9 @@
 #define ABOT_NODE_H
 
 #include "abot_control/abot_control.h"
-#include "abot_control/abot_gui.h"
 #include <actionlib/server/simple_action_server.h>
 #include <control_msgs/FollowJointTrajectoryAction.h>
 #include <math.h>
-#include <QWidget>
 
 typedef actionlib::SimpleActionServer<control_msgs::FollowJointTrajectoryAction> AbotServer;
 
@@ -28,8 +26,6 @@ namespace abot {
       abot_node(int argc, char** argv);
       void Send2Serial(const control_msgs::FollowJointTrajectoryGoalConstPtr& a_goal, AbotServer* as/*, abot::Abot_control* robot*/);
     private:
-      QWidget window;
-      abot_gui * gui;
       ros::Publisher JointStatePublisher;
       //AbotServer abotServer;
       Abot_control* Abot_controller;
