@@ -6,6 +6,10 @@ abot::abot_gui::abot_gui(QWidget *parent) :
 {
   ui->setupUi(this);
   showTimeStamp = 0;
+  int argc = 0; char **argv = NULL;
+  ros::init (argc, argv, "abot_kinematics");
+  ros::AsyncSpinner spin(1);
+  spin.start();
 }
 
 
