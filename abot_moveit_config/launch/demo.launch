@@ -43,6 +43,8 @@
     <arg name="debug" value="$(arg debug)"/>
   </include>
 
+  <node name="abot_control" pkg="abot_control" type="abot_control_node" output="screen"/>
+
   <!-- Run Rviz and load the default config to see the state of the move_group node -->
   <include file="$(find abot_moveit_config)/launch/moveit_rviz.launch">
     <arg name="config" value="true"/>
@@ -53,5 +55,6 @@
   <include file="$(find abot_moveit_config)/launch/default_warehouse_db.launch" if="$(arg db)">
     <arg name="moveit_warehouse_database_path" value="$(arg db_path)"/>
   </include>
+
 
 </launch>

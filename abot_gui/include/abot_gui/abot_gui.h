@@ -25,7 +25,7 @@ namespace abot {
     Q_OBJECT
     public:
       abot_gui(QWidget *parent = nullptr);
-
+      void initPlanningGroup(std::string name);
     private:
       moveit::planning_interface::MoveGroupInterface * PlanningGroup;
       geometry_msgs::Pose target_pose;
