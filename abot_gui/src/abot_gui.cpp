@@ -22,7 +22,6 @@ void abot::abot_gui::initPlanningGroup(std::string name)
 
 void abot::abot_gui::on_pushButton_clicked()
 {
-  double theta = (3.14156*((ui->doubleSpinBox_4->text().toDouble())/180.0))/2;
   target_pose.position.x = (ui->doubleSpinBox_1->text().toDouble())/1000;
   target_pose.position.y = (ui->doubleSpinBox_2->text().toDouble())/1000;
   target_pose.position.z = (ui->doubleSpinBox_3->text().toDouble())/1000;
@@ -33,22 +32,8 @@ void abot::abot_gui::on_pushButton_clicked()
     Alpha -= 2*pi;
   }
   target_pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(0, 1.5708, Alpha);;
-//  target_pose.orientation.w = std::cos(theta);
-//  target_pose.orientation.x = x_transform*std::sin(theta);
-//  target_pose.orientation.y = y_transform*std::sin(theta);
-//  target_pose.orientation.z = z_transform*std::sin(theta);
-//  target_pose.orientation.w = std::cos(1.5705/2);
-//  target_pose.orientation.x = 0;
-//  target_pose.orientation.y = std::sin(1.5705/2);
-//  target_pose.orientation.z = 0;
   PlanningGroup->setPoseTarget(target_pose);
-  //PlanningGroup->setRandomTarget();
-  //geometry_msgs::PoseStamped pos = PlanningGroup->getRandomPose("Link4");
-  ui->textBrowser->insertPlainText(QString::number(Alpha_sin,10,5)+","+QString::number(target_pose.position.x,10,5)+","+QString::number(target_pose.position.y,10,5)+","+QString::number(target_pose.position.z,10,5)+","+QString::number(target_pose.orientation.w,10,5)+","+QString::number(target_pose.orientation.x,10,5)+","+QString::number(target_pose.orientation.y,10,5)+","+QString::number(target_pose.orientation.z,10,5)+"\n");
-  //geometry_msgs::PoseStamped pos = PlanningGroup->getPoseTarget(PlanningGroup->getEndEffectorLink());
-  //geometry_msgs::PoseStamped pos = PlanningGroup->getRandomPose(PlanningGroup->getEndEffectorLink());
-  //ui->textBrowser->insertPlainText(QString::number(pos.pose.position.x,10,5)+","+QString::number(pos.pose.position.y,10,5)+","+QString::number(pos.pose.position.z,10,5)+","+QString::number(pos.pose.orientation.w,10,5)+","+QString::number(pos.pose.orientation.x,10,5)+","+QString::number(pos.pose.orientation.y,10,5)+","+QString::number(pos.pose.orientation.z,10,5)+"\n");
-  //PlanningGroup->setPoseTarget(pos);
+  ui->textBrowser->insertPlainText(QString::number(target_pose.position.x,10,5)+","+QString::number(target_pose.position.y,10,5)+","+QString::number(target_pose.position.z,10,5)+","+QString::number(target_pose.orientation.w,10,5)+","+QString::number(target_pose.orientation.x,10,5)+","+QString::number(target_pose.orientation.y,10,5)+","+QString::number(target_pose.orientation.z,10,5)+"\n");
   PlanningGroup->asyncMove();
   if(showTimeStamp == 1)
   {
