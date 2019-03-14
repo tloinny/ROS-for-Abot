@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>663</width>
-    <height>505</height>
+    <height>526</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>0</y>
+      <y>10</y>
       <width>641</width>
       <height>471</height>
      </rect>
@@ -38,7 +38,7 @@
           <rect>
            <x>10</x>
            <y>10</y>
-           <width>221</width>
+           <width>171</width>
            <height>431</height>
           </rect>
          </property>
@@ -53,11 +53,11 @@
            <rect>
             <x>10</x>
             <y>30</y>
-            <width>201</width>
-            <height>281</height>
+            <width>151</width>
+            <height>321</height>
            </rect>
           </property>
-          <layout class="QGridLayout" name="gridLayout" columnstretch="1,2">
+          <layout class="QGridLayout" name="gridLayout" columnstretch="1,0">
            <property name="sizeConstraint">
             <enum>QLayout::SetNoConstraint</enum>
            </property>
@@ -76,20 +76,6 @@
            <property name="spacing">
             <number>10</number>
            </property>
-           <item row="7" column="0">
-            <widget class="QLabel" name="label_6">
-             <property name="font">
-              <font>
-               <family>Century Schoolbook L</family>
-               <pointsize>14</pointsize>
-               <italic>true</italic>
-              </font>
-             </property>
-             <property name="text">
-              <string>YAW:</string>
-             </property>
-            </widget>
-           </item>
            <item row="3" column="0">
             <widget class="QLabel" name="label_2">
              <property name="font">
@@ -149,20 +135,6 @@
               </font>
              </property>
              <property name="text">
-              <string>ROW:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="0">
-            <widget class="QLabel" name="label_5">
-             <property name="font">
-              <font>
-               <family>Century Schoolbook L</family>
-               <pointsize>14</pointsize>
-               <italic>true</italic>
-              </font>
-             </property>
-             <property name="text">
               <string>PITCH:</string>
              </property>
             </widget>
@@ -176,12 +148,6 @@
               <double>700.000000000000000</double>
              </property>
             </widget>
-           </item>
-           <item row="6" column="1">
-            <widget class="QDoubleSpinBox" name="doubleSpinBox_5"/>
-           </item>
-           <item row="7" column="1">
-            <widget class="QDoubleSpinBox" name="doubleSpinBox_6"/>
            </item>
            <item row="3" column="1">
             <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
@@ -211,8 +177,8 @@
          <widget class="QPushButton" name="pushButton">
           <property name="geometry">
            <rect>
-            <x>70</x>
-            <y>360</y>
+            <x>50</x>
+            <y>370</y>
             <width>80</width>
             <height>26</height>
            </rect>
@@ -225,9 +191,9 @@
         <widget class="QGroupBox" name="groupBox_2">
          <property name="geometry">
           <rect>
-           <x>240</x>
+           <x>190</x>
            <y>10</y>
-           <width>381</width>
+           <width>431</width>
            <height>431</height>
           </rect>
          </property>
@@ -239,7 +205,7 @@
            <rect>
             <x>15</x>
             <y>31</y>
-            <width>351</width>
+            <width>401</width>
             <height>311</height>
            </rect>
           </property>
@@ -249,7 +215,7 @@
            <rect>
             <x>40</x>
             <y>350</y>
-            <width>131</width>
+            <width>151</width>
             <height>24</height>
            </rect>
           </property>
@@ -260,9 +226,9 @@
          <widget class="QCheckBox" name="checkBox_2">
           <property name="geometry">
            <rect>
-            <x>220</x>
+            <x>240</x>
             <y>350</y>
-            <width>121</width>
+            <width>161</width>
             <height>24</height>
            </rect>
           </property>
@@ -273,8 +239,8 @@
          <widget class="QPushButton" name="pushButton_1">
           <property name="geometry">
            <rect>
-            <x>100</x>
-            <y>390</y>
+            <x>120</x>
+            <y>380</y>
             <width>171</width>
             <height>26</height>
            </rect>

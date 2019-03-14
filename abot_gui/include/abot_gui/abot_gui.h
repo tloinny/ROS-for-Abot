@@ -18,6 +18,9 @@
 #include <moveit/move_group_interface/move_group_interface.h>
 #include <QString>
 #include <QDateTime>
+#include <math.h>
+
+#define pi 3.1415926
 
 namespace abot {
   class abot_gui : public QMainWindow
