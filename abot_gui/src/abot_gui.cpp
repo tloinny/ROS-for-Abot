@@ -12,6 +12,7 @@ abot::abot_gui::abot_gui(QWidget *parent) :
   ros::AsyncSpinner spin(10);
   initPlanningGroup("abot");
   PlanningGroup->setPlanningTime(10.0);
+  PlanningGroup->allowReplanning(true);
   spin.start();
 }
 

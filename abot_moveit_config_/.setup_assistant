@@ -6,6 +6,6 @@ moveit_setup_assistant_config:
   SRDF:
     relative_path: config/abot.srdf
   CONFIG:
-    author_name: TonyLin
+    author_name: tl
     author_email: tloinny@gmail.com
-    generated_timestamp: 1552650282
+    generated_timestamp: 1552535738
